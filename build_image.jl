@@ -1,6 +1,7 @@
 using Pkg
 Pkg.update()
 
+Pkg.add("PackageCompiler")
 using PackageCompiler
 
 create_sysimage(
