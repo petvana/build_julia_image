@@ -3,7 +3,10 @@
 # p = Plots.plot(rand(5), rand(5))
 # display(p)
 
-using PyPlot
-plt.plot(1,1,"rx")
+# using PyPlot
+# plt.plot(1,1,"rx")
 
 using JuMP
+using Ipopt
+using JuMP
+using Ipopt
