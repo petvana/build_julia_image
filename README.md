@@ -10,7 +10,7 @@ Then, the system image (`user_image.so`) is prepared for you, and can be run by
 julia -J user_image.so
 ```
 
-I preffer to create short bash script of selected name (I use only `j`)
+I preffer to create short bash script of arbitrary name (I use only `j`)
 ```bash
 #!/usr/bin/env bash
 julia -J /[YOUR-PATH]/build_julia_image/user_image.so $@
