@@ -1,17 +1,30 @@
-using Pkg
-Pkg.update()
+#!/usr/bin/env julia
 
-Pkg.add("PackageCompiler")
+using Pkg
+# Pkg.update()
+
+# Pkg.add("PackageCompiler")
 using PackageCompiler
 
-# There is still problem with PyPlot, see https://github.com/JuliaPy/PyPlot.jl/issues/476
-pyplot_subpackages = [:Colors, :LaTeXStrings, :PyCall, :Sockets, :Test, :VersionParsing]
+packages = [
+    :JuMP,
+    :Ipopt,
+    :Dubins,
+    :TimerOutputs,
+    :PyPlot,
+    :ProgressMeter,
+    # :AutoCompiler,
+]
 
-Pkg.add.(string(x) for x in pyplot_subpackages)
+# There is still problem with PyPlot, see https://github.com/JuliaPy/PyPlot.jl/issues/476
+
+autocompiler_dir = "$(homedir())/.julia/autocompiler/v$(VERSION.major).$(VERSION.minor)"
+statements_dir = "$(autocompiler_dir)/statements"
+statement_files = readdir(statements_dir, join=true)
 
 create_sysimage(
-    [:JuMP, :Ipopt, pyplot_subpackages...], 
-    sysimage_path="user_image.so", 
-    precompile_execution_file="precompiled.jl",
+    packages,
+    sysimage_path="$(autocompiler_dir)/image.so", 
+    script = "precompile_snooped.jl",
     # incremental = false
 )
