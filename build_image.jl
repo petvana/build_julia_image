@@ -19,8 +19,8 @@ packages = [
 # There is still problem with PyPlot, see https://github.com/JuliaPy/PyPlot.jl/issues/476
 
 autocompiler_dir = "$(homedir())/.julia/autocompiler/v$(VERSION.major).$(VERSION.minor)"
-statements_dir = "$(autocompiler_dir)/statements"
-statement_files = readdir(statements_dir, join=true)
+# statements_dir = "$(autocompiler_dir)/statements"
+# statement_files = readdir(statements_dir, join=true)
 
 create_sysimage(
     packages,
