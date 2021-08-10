@@ -1,11 +1,5 @@
 @eval Module() begin
 
-import Dates
-
-autocompiler_dir = "$(homedir())/.julia/autocompiler/v$(VERSION.major).$(VERSION.minor)"
-
-mkpath(autocompiler_dir)
-
 PrecompileStagingArea = Module()
 for (_pkgid, _mod) in Base.loaded_modules
     if !(_pkgid.name in ("Main", "Core", "Base"))
@@ -14,10 +8,8 @@ for (_pkgid, _mod) in Base.loaded_modules
 end
 
 let 
-    status_true = 0
-    status_false = 0
-    status_fail = 0
-    statement_file = "$(autocompiler_dir)/statements.txt"
+    status_true = status_false = status_fail = 0
+    statement_file = "$(homedir())/.julia/autocompiler/statements.txt"
     if isfile(statement_file)
         for statement in eachline(statement_file)
             # println(statement)
@@ -25,9 +17,9 @@ let
             # N with a large number seems to work around it.
             statement = replace(statement, r"Vararg{(.*?), N} where N" => s"Vararg{\\1, 100}")
             try
-                statement = "tmp = " * statement
-                Base.include_string(PrecompileStagingArea, statement)
+                Base.include_string(PrecompileStagingArea, "tmp = " * statement)
                 if PrecompileStagingArea.tmp
+                    #printstyled("\r", statement, "\n", color = :green)
                     status_true += 1
                 else
                     printstyled("\r", statement, "\n", color = :yellow)
