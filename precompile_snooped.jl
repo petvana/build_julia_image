@@ -1,5 +1,7 @@
 @eval Module() begin
 
+import Dates
+
 autocompiler_dir = "$(homedir())/.julia/autocompiler/v$(VERSION.major).$(VERSION.minor)"
 
 mkpath(autocompiler_dir)
@@ -28,9 +30,11 @@ let
                 if PrecompileStagingArea.tmp
                     status_true += 1
                 else
+                    printstyled("\r", statement, "\n", color = :yellow)
                     status_false += 1
                 end
             catch
+                printstyled("\r", statement, "\n", color = :red)
                 status_fail += 1
                 # See julia issue #28808
                 @debug "failed to execute \$statement"

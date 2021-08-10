@@ -1,10 +1,14 @@
 #!/usr/bin/env julia
 
 using Pkg
+using Logging
 # Pkg.update()
 
 # Pkg.add("PackageCompiler")
 using PackageCompiler
+
+logger = SimpleLogger(stderr, Logging.Debug)
+global_logger(logger)
 
 packages = [
     :JuMP,
