@@ -1,10 +1,10 @@
 #!/usr/bin/env julia
 
 using Pkg
+Pkg.update()
 using Logging
-# Pkg.update()
 
-# Pkg.add("PackageCompiler")
+Pkg.add("PackageCompiler")
 using PackageCompiler
 
 logger = SimpleLogger(stderr, Logging.Debug)
@@ -17,7 +17,6 @@ packages = [
     :TimerOutputs,
     :PyPlot,
     :ProgressMeter,
-    # :AutoCompiler,
 ]
 
 # There is still problem with PyPlot, see https://github.com/JuliaPy/PyPlot.jl/issues/476
