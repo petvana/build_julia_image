@@ -14,10 +14,8 @@ using PackageCompiler
 packages = [
     :JuMP,
     :Ipopt,
-    :Dubins,
     :TimerOutputs,
     :PyPlot,
-    :ProgressMeter,
 ]
 
 autocompiler_dir = "$(homedir())/.julia/autocompiler"
